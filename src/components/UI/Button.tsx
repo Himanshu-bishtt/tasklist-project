@@ -1,9 +1,8 @@
 const Button: React.FC<{
   text: string;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
-  showForm?: boolean;
   classname?: string;
-}> = ({ text, onClick, showForm, classname }) => {
+}> = ({ text, onClick, classname }) => {
   return (
     <div>
       <button

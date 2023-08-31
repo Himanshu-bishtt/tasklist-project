@@ -7,7 +7,8 @@ import NewTaskItem from "./NewTaskItem";
 const TaskList: React.FC<{ items: TodoItemArray }> = ({ items }) => {
   const [showForm, setShowForm] = useState(false);
 
-  const newTaskItemHandler = () => {
+  const newTaskItemHandler = (event: React.MouseEvent<HTMLElement>) => {
+    event.preventDefault();
     setShowForm((prev) => !prev);
   };
 
@@ -28,12 +29,10 @@ const TaskList: React.FC<{ items: TodoItemArray }> = ({ items }) => {
         ))}
       </ul>
 
-      <Button
-        text="Create new task"
-        onClick={newTaskItemHandler}
-        showForm={showForm}
-      />
-      {showForm && <NewTaskItem />}
+      {!showForm && (
+        <Button text="Create new task" onClick={newTaskItemHandler} />
+      )}
+      {showForm && <NewTaskItem onClick={newTaskItemHandler} />}
     </div>
   );
 };
