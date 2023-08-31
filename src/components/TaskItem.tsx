@@ -4,7 +4,7 @@ const TaskItem: React.FC<TodoItem> = ({ text, isComplete, priority }) => {
   return (
     <figure
       className={`flex flex-row justify-between items-center w-full text-white py-3 px-4 rounded-md my-5 ${
-        isComplete ? "bg-slate-400 line-through" : "bg-slate-600"
+        isComplete ? "bg-green-400 line-through" : "bg-slate-600"
       }`}
     >
       <p className="w-48 truncate ">{text}</p>
