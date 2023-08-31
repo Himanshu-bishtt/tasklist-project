@@ -4,3 +4,5 @@ export type TodoItem = {
   isComplete: boolean;
   priority: string;
 };
+
+export type TodoItemArray = TodoItem[];
