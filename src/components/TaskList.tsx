@@ -5,29 +5,12 @@ import Button from "./UI/Button";
 import NewTaskForm from "./NewTaskForm";
 import { v4 as uuidv4 } from "uuid";
 import ErrorMessage from "./UI/ErrorMessage";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
 
 const TaskList = () => {
   console.log("Tasklist");
-  const items: TodoItemArray = [
-    {
-      id: "1",
-      text: "Football match at Noida Stadium",
-      isComplete: false,
-      priority: "medium",
-    },
-    {
-      id: "2",
-      text: "Guitar practice with rohan at plaza",
-      isComplete: true,
-      priority: "low",
-    },
-    // {
-    //   id: "3",
-    //   text: "Lunch with friends at Shipra Mall",
-    //   isComplete: false,
-    //   priority: "high",
-    // },
-  ];
+  const items: TodoItemArray = [];
 
   const [showForm, setShowForm] = useState<boolean>(false);
   const [taskItems, setTaskItems] = useState<TodoItem[]>(items);
@@ -43,11 +26,21 @@ const TaskList = () => {
 
   const taskDeleteHandler: Dispatch<string | undefined> = (id?: string) => {
     setTaskItems((items) => items.filter((item) => item.id !== id));
+    toast.error("Successfully deleted task", {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
     console.log(taskItems);
   };
 
   return (
-    <div className="flex flex-col items-center gap-y-3 justify-center w-full bg-slate-900 text-white py-8 px-6 my-5 rounded-lg">
+    <div className="flex flex-col items-center gap-y-3 justify-center w-full bg-slate-900 text-white shadow-lg py-8 px-6 my-5 rounded-lg">
       <h2 className="text-2xl text-center font-bold">Your tasks today</h2>
       <ul className="w-full">
         {taskItems.length !== 0 ? (

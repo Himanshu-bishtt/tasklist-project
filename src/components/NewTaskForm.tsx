@@ -1,6 +1,8 @@
 import { Dispatch, useRef } from "react";
 import Button from "./UI/Button";
 import { TodoItem } from "../types/types";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
 
 const NewTaskItem: React.FC<{
   onAddTask: Dispatch<TodoItem>;
@@ -69,6 +71,16 @@ const NewTaskItem: React.FC<{
                 isComplete: false,
               });
               setShowForm(false);
+              toast.success("Successfully added task", {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+              });
             }}
           />
           <Button
