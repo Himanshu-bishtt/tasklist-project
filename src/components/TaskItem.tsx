@@ -22,6 +22,11 @@ const TaskItem: React.FC<{
     if (confirm("Sure you want to delete the task?")) onTaskDelete(id);
   };
 
+  let priorityClasses: string = "";
+  if (priority === "low") priorityClasses = "bg-white text-slate-800";
+  else if (priority === "medium") priorityClasses = "bg-yellow-500";
+  else priorityClasses = "text-white bg-red-800 ";
+
   return (
     <figure
       title={id}
@@ -34,7 +39,9 @@ const TaskItem: React.FC<{
         <p className="text-base truncate">{text}</p>
         <p className="text-xs text-slate-400">{id}</p>
       </div>
-      <h3 className="w-20 bg-red-700 text-white text-center rounded-full py-1 shadow">
+      <h3
+        className={`w-20 text-center py-1 shadow-lg uppercase text-sm font-bold rounded ${priorityClasses}`}
+      >
         {priority}
       </h3>
       <div className="flex gap-x-3 ml-5">
