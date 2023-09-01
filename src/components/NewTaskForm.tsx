@@ -1,9 +1,11 @@
-import { useRef } from "react";
+import { Dispatch, useRef } from "react";
 import Button from "./UI/Button";
+import { TodoItem } from "../types/types";
 
 const NewTaskItem: React.FC<{
-  onClick: React.MouseEventHandler<HTMLButtonElement>;
-}> = ({ onClick }) => {
+  onAddTask: Dispatch<TodoItem>;
+  setShowForm: Dispatch<boolean>;
+}> = ({ onAddTask, setShowForm }) => {
   const textRef = useRef<HTMLTextAreaElement | null>(null);
   const priorityRef = useRef<HTMLSelectElement | null>(null);
 
@@ -60,13 +62,21 @@ const NewTaskItem: React.FC<{
               event.preventDefault();
               const textValue = textRef.current?.value;
               const priorityValue = priorityRef.current?.value;
-              console.log(textValue, priorityValue);
+              if (textValue?.length === 0) return;
+              onAddTask({
+                text: textValue,
+                priority: priorityValue,
+                isComplete: false,
+              });
+              setShowForm(false);
             }}
           />
           <Button
             text="Cancel"
             classname="w-full bg-transparent border border-sky-600 hover:bg-sky-400"
-            onClick={onClick}
+            onClick={() => {
+              setShowForm(false);
+            }}
           />
         </div>
       </form>

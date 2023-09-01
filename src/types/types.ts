@@ -1,7 +1,7 @@
 export type TodoItem = {
-  text: string;
+  text?: string;
   isComplete: boolean;
-  priority: string;
+  priority?: string;
 };
 
 export type TodoItemArray = TodoItem[];
