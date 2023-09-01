@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { Dispatch, useState } from "react";
 import { TodoItem, TodoItemArray } from "../types/types";
 import TaskItem from "./TaskItem";
 import Button from "./UI/Button";
@@ -30,7 +30,7 @@ const TaskList = () => {
   ];
 
   const [showForm, setShowForm] = useState<boolean>(false);
-  const [taskItems, setTaskItems] = useState(items);
+  const [taskItems, setTaskItems] = useState<TodoItem[]>(items);
 
   const addNewTaskHandler = (data: TodoItem) => {
     setTaskItems((items) => [...items, { ...data, id: uuidv4() }]);
@@ -39,6 +39,11 @@ const TaskList = () => {
   const newTaskItemHandler = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
     setShowForm((prev) => !prev);
+  };
+
+  const taskDeleteHandler: Dispatch<string | undefined> = (id?: string) => {
+    setTaskItems((items) => items.filter((item) => item.id !== id));
+    console.log(taskItems);
   };
 
   return (
@@ -53,6 +58,7 @@ const TaskList = () => {
               text={item.text}
               isComplete={item.isComplete}
               priority={item.priority}
+              onTaskDelete={taskDeleteHandler}
             />
           ))
         ) : (
