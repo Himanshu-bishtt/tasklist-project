@@ -1,4 +1,4 @@
-import React, { Dispatch, useState } from "react";
+import React, { Dispatch, useEffect, useRef, useState } from "react";
 import { TodoItem, TodoItemArray } from "../types/types";
 import TaskItem from "./TaskItem";
 import Button from "./UI/Button";
@@ -9,11 +9,28 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 
 const TaskList = () => {
-  console.log("Tasklist");
   const items: TodoItemArray = [];
 
   const [showForm, setShowForm] = useState<boolean>(false);
   const [taskItems, setTaskItems] = useState<TodoItem[]>(items);
+  const firstRender = useRef<boolean>(true);
+
+  useEffect(() => {
+    if (firstRender.current) {
+      firstRender.current = false;
+      return;
+    }
+    toast.info("Tasklist updated", {
+      position: "bottom-center",
+      autoClose: 4000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  }, [taskItems]);
 
   const addNewTaskHandler = (data: TodoItem) => {
     setTaskItems((items) => [...items, { ...data, id: uuidv4() }]);
@@ -36,7 +53,6 @@ const TaskList = () => {
       progress: undefined,
       theme: "dark",
     });
-    console.log(taskItems);
   };
 
   return (
