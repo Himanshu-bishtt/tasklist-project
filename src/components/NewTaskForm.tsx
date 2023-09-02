@@ -64,7 +64,19 @@ const NewTaskItem: React.FC<{
               event.preventDefault();
               const textValue = textRef.current?.value;
               const priorityValue = priorityRef.current?.value;
-              if (textValue?.length === 0) return;
+              if (textValue?.length === 0) {
+                toast.error("Text input cannot be empty", {
+                  position: "top-right",
+                  autoClose: 2000,
+                  hideProgressBar: true,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                  theme: "dark",
+                });
+                return;
+              }
               onAddTask({
                 text: textValue,
                 priority: priorityValue,
