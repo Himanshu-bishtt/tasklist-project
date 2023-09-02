@@ -5,6 +5,7 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import About from "./pages/About.tsx";
 import RootLayout from "./pages/RootLayout.tsx";
+import { Home } from "./pages/Home.tsx";
 
 const router = createBrowserRouter([
   {
@@ -13,6 +14,10 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
+        element: <Home />,
+      },
+      {
+        path: "/tasklist",
         element: <App />,
       },
       {

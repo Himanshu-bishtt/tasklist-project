@@ -12,7 +12,7 @@ const NewTaskItem: React.FC<{
   const priorityRef = useRef<HTMLSelectElement | null>(null);
 
   return (
-    <div className="isolate w-3/4 bg-slate-800 text-white px-6 py-24 sm:py-8 lg:px-8 mt-6 rounded-lg">
+    <div className="isolate w-3/4 bg-slate-800 text-white px-6 py-24 sm:py-8 lg:px-8 my-6 rounded-lg">
       <div className="mx-auto max-w-2xl text-center">
         <h2 className="text-2xl font-bold tracking-tight ">Add new task</h2>
       </div>
